@@ -7,7 +7,7 @@ module Spree
 
       def sign_up
 
-        @user = Spree::User.find_by_email(params[:user][:email])
+        @user = Spree::User.find_by_email(params[:email])
 
         if @user.present?
           render "spree/api/v1/users/user_exists", :status => 400 and return
@@ -22,8 +22,8 @@ module Spree
       end
 
       def sign_in
-        @user = Spree::User.find_by_email(params[:user][:email])
-        if !@user.present? || !@user.valid_password?(params[:user][:password])
+        @user = Spree::User.find_by_email(params[:email])
+        if !@user.present? || !@user.valid_password?(params[:password])
           unauthorized
           return
         end
@@ -31,9 +31,9 @@ module Spree
       end
 
       def login_check
-        @user = Spree::User.find_by_email(params[:user][:email])
+        @user = Spree::User.find_by_email(params[:email])
 
-        unless params[:user].has_key?(:email)
+        unless params.has_key?(:email)
           render inline: "", :status => 400 and return
         end
 
@@ -49,7 +49,7 @@ module Spree
       end
 
       def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation)
+        params.permit(:email, :password, :password_confirmation)
       end
 
       end
