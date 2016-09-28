@@ -1,10 +1,5 @@
-object @user
-attributes :id, :spree_api_key, :email
-
-child(:bill_address => :bill_address) do
-  extends "spree/api/v1/addresses/show"
-end
-
-child(:ship_address => :ship_address) do
-  extends "spree/api/v1/addresses/show"
-end
+object false
+user = @user
+node(:id){user.id}
+node(:email){user.email}
+node(:spree_api_key){user.spree_api_key}

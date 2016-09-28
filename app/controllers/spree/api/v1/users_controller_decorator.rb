@@ -28,6 +28,7 @@ module Spree
           return
         end
         @user.generate_spree_api_key! if @user.spree_api_key.blank?
+
       end
 
       def login_check
